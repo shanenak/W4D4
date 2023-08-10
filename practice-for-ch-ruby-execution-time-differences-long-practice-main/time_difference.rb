@@ -28,18 +28,21 @@ def largest_contiguous_subsum(list)
 end
 
 def largest_contiguous_subsum2(list)
-
-    # iterative below
     curr_sum = list.first
     max_sum = list.sum 
-    list.each_with_index do |ele, i| # n^2
-        # check max_sum against ___
-        # reassign max_sum when ___
+    (1...list.length).each do |idx| # n^2
+        curr_sum += list[idx]
+        if curr_sum > max_sum
+            max_sum = curr_sum
+        else
+            curr_sum = list[idx]
+        end
     end
-    sums = sub_arr.map { |sub| sub.sum } # 2n
-    sums.max # n
+    max_sum
 end
 
+list = [5, 3, -7, 500]
+p largest_contiguous_subsum2(list) # => 501
 list = [5, 3, -7]
 p largest_contiguous_subsum2(list) # => 8
 
