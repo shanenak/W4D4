@@ -15,4 +15,10 @@ arr = [0, 1, 5, 7]
 def okay_two_sum?(arr, target_sum)
     arr.sort!
     arr.select! {|ele| ele < target_sum}
+
+    i = 0
+    j = arr.length - 1
+
+    
+
 end
