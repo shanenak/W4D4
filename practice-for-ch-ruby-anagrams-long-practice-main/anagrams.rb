@@ -21,6 +21,23 @@ def third_anagram?(str1, str2)
     str1.chars.sort == str2.chars.sort
 end
 
-p third_anagram?("gizmo", "sally")    #=> false
-p third_anagram?("elvis", "lives")    #=> true
+# p third_anagram?("gizmo", "sally")    #=> false
+# p third_anagram?("elvis", "lives")    #=> true
 
+def fourth_anagram?(str1, str2)
+    count = Hash.new { |h, k| h[k] = Hash.new(0) }
+
+    str1.chars.each do |char|
+        count[str1][char] += 1
+    end
+
+    str2.chars.each do |char|
+        count[str2][char] += 1
+    end
+
+    count[str1] == count[str2]
+    
+end
+
+p fourth_anagram?("gizmo", "sally")    #=> false
+p fourth_anagram?("elvis", "lives")    #=> true
