@@ -18,20 +18,35 @@ end
 
 def largest_contiguous_subsum(list)
     sub_arr = []
-    list.each_with_index do |ele, i|
+    list.each_with_index do |ele, i| # n^2
         (i...list.length).each do |j|
             sub_arr << list[i..j]
         end
     end
+    sums = sub_arr.map { |sub| sub.sum } # 2n
+    sums.max # n
+end
+
+def largest_contiguous_subsum2(list)
+
+    # iterative below
+    curr_sum = list.first
+    max_sum = list.sum 
+    list.each_with_index do |ele, i| # n^2
+        # check max_sum against ___
+        # reassign max_sum when ___
+    end
+    sums = sub_arr.map { |sub| sub.sum } # 2n
+    sums.max # n
 end
 
 list = [5, 3, -7]
-largest_contiguous_subsum(list) # => 8
+p largest_contiguous_subsum2(list) # => 8
 
 # possible sub-sums
-p [5]           # => 5
-p [5, 3]        # => 8 --> we want this one
-p [5, 3, -7]    # => 1
-p [3]           # => 3
-p [3, -7]       # => -4
-p [-7]          # => -7
+# p [5]           # => 5
+# p [5, 3]        # => 8 --> we want this one
+# p [5, 3, -7]    # => 1
+# p [3]           # => 3
+# p [3, -7]       # => -4
+# p [-7]          # => -7
