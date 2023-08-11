@@ -55,14 +55,28 @@ end
 class MyStack
   def initialize
     @store = []
+    @max = [0]
+    @min = [1000000]
   end
 
   def push(ele)
     @store << ele
+    @max << ele if ele > self.max
+    @min << ele if ele < self.min
   end
 
   def pop
-    @store.pop
+    ele = @store.pop
+    @max.pop if @max.last == ele
+    @min.pop if @min.last == ele
+  end
+
+  def max
+    @max.last
+  end
+
+  def min
+    @min.last
   end
 
   def empty?
@@ -78,17 +92,28 @@ class MyStack
   end
 end
 
-# q = MyStack.new
-# q.push('S')
-# q.push('M')
-# p q.peek
-# p q.size
-# p q.empty?
-# q.pop
-# p q.peek
-# q.pop
-# p q.size
-# p q.empty?
+q = MyStack.new
+q.push(4)
+q.push(9)
+q.push(3)
+q.push(7)
+q.push(17) # [4, 9, 3, 7, 17]
+p q.peek
+p q.size
+p q.empty?
+p q.max
+p q.min
+q.pop
+p q.peek # 7
+q.pop
+p q.size # 3
+p q.max # 9
+p q.min
+p q.empty?
+q.pop
+p q.max # 9
+p q.min
+
 
 class StackQueue
     def initialize
@@ -124,14 +149,14 @@ class StackQueue
 
 end
 
-q = StackQueue.new
-q.enqueue('S')
-q.enqueue('M')
-p q.peek
-p q.size
-p q.empty?
-q.dequeue
-p q.peek
-q.dequeue
-p q.size
-p q.empty?
+# q = StackQueue.new
+# q.enqueue('S')
+# q.enqueue('M')
+# p q.peek
+# p q.size
+# p q.empty?
+# q.dequeue
+# p q.peek
+# q.dequeue
+# p q.size
+# p q.empty?
