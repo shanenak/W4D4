@@ -92,27 +92,27 @@ class MyStack
   end
 end
 
-q = MyStack.new
-q.push(4)
-q.push(9)
-q.push(3)
-q.push(7)
-q.push(17) # [4, 9, 3, 7, 17]
-p q.peek
-p q.size
-p q.empty?
-p q.max
-p q.min
-q.pop
-p q.peek # 7
-q.pop
-p q.size # 3
-p q.max # 9
-p q.min
-p q.empty?
-q.pop
-p q.max # 9
-p q.min
+# q = MyStack.new
+# q.push(4)
+# q.push(9)
+# q.push(3)
+# q.push(7)
+# q.push(17) # [4, 9, 3, 7, 17]
+# p q.peek
+# p q.size
+# p q.empty?
+# p q.max
+# p q.min
+# q.pop
+# p q.peek # 7
+# q.pop
+# p q.size # 3
+# p q.max # 9
+# p q.min
+# p q.empty?
+# q.pop
+# p q.max # 9
+# p q.min
 
 
 class StackQueue
@@ -160,3 +160,80 @@ end
 # q.dequeue
 # p q.size
 # p q.empty?
+
+class MinMaxStackQueue
+    def initialize
+        @staging = MyStack.new
+        @actual = MyStack.new
+    end
+
+    def size
+        @staging.size + @actual.size 
+    end
+
+    def empty?
+        @staging.empty? && @actual.empty?
+    end
+
+    def enqueue(ele)
+        while !@actual.empty?
+            @staging.push(@actual.pop)
+        end
+        @staging.push(ele)
+        while !@staging.empty?
+            @actual.push(@staging.pop)
+        end
+    end
+    
+    def dequeue
+        @actual.pop
+    end
+
+    def peek
+        @actual.peek
+    end
+
+    def max
+        case @staging.max <=> @actual.max
+        when -1
+            @actual.max
+        when 0
+            @actual.max
+        when 1
+            @staging.max
+        end
+    end
+
+    def min
+        case @staging.min <=> @actual.min
+        when -1
+            @staging.min
+        when 0
+            @actual.min
+        when 1
+            @actual.min
+        end
+    end
+end
+
+q = MinMaxStackQueue.new
+q.enqueue(4)
+q.enqueue(9)
+q.enqueue(3)
+q.enqueue(7)
+q.enqueue(17) # [4, 9, 3, 7, 17]
+p q.peek
+p q.size
+p q.empty?
+p q.max
+p q.min
+q.dequeue
+p q.peek # 7
+q.dequeue
+p q.size # 3
+p q.max # 9
+p q.min
+p q.empty?
+q.dequeue
+p q.max # 9
+p q.min
